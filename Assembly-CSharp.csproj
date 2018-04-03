@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B9185AED-41EF-1653-056A-D80594983A88}</ProjectGuid>
+    <ProjectGuid>{8A5B7AA4-53C9-9882-8FD4-E8910CBF3A0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,8 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AttackScript.cs" />
-     <Compile Include="Assets\PlayerScript.cs" />
+     <Compile Include="Assets\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\AttackScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
