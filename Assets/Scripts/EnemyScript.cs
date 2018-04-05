@@ -12,9 +12,7 @@ public class EnemyScript : MonoBehaviour {
 
 	GameObject player;
 	Vector3 playerPos;
-
-	// Use this for initialization
-	//int runHash = Animator.StringToHash("Run");
+    
 
 		
 	void Start () {
@@ -25,8 +23,7 @@ public class EnemyScript : MonoBehaviour {
 		health = 20;
 		deltaTime = Time.time;
 	}
-
-	// Update is called once per frame
+    
 	void Update () {
 		playerPos = player.transform.position;
 		enemyPos = gameObject.transform.position;
@@ -36,7 +33,6 @@ public class EnemyScript : MonoBehaviour {
 		}
 		if (Time.time - deltaTime > 3 && runOnce) {
 			Debug.Log ("HALLÅE");
-			//animator.SetTrigger (runHash);
 			animator.SetInteger("state", 1);
 			runOnce = !runOnce;
 		} else if (Vector3.Distance (playerPos, enemyPos) < 2) {
