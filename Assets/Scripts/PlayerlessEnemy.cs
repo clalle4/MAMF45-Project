@@ -1,55 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerlessEnemy : MonoBehaviour
 {
     Animator animator;
-    float deltaTime;
+    float lastTime;
     private int health;
     public bool isRagdolled;
     bool runOnce;
     public GameObject spine;
-    Vector3 enemyPos;
+    public GameObject hip;
+    Vector3 spinePos;
+    Vector3 hipPos;
+    NavMeshAgent nav;
+    int currentAni;
 
     //GameObject player;
     Vector3 playerPos;
-
+    public float movementSpeed = 0.001f;
     // Use this for initialization
     //int runHash = Animator.StringToHash("Run");
 
 
     void Start()
     {
+        nav = gameObject.GetComponent<NavMeshAgent>();
         runOnce = true;
         //player = GameObject.FindGameObjectWithTag ("MainCamera");
         animator = gameObject.GetComponent<Animator>();
         isRagdolled = false;
         health = 20;
-        deltaTime = Time.time;
+        lastTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = new Vector3((float)0.64, (float)1.130198, (float)-1.94);
+        playerPos = new Vector3((float)0.64, (float)1.130198, (float)-1.94); //hård kod, byt ut mot nedre rad för HMD
         //playerPos = player.transform.position;
-        enemyPos = spine.transform.position;
+        spinePos = spine.transform.position;
+        hipPos = hip.transform.position;   
 
         if (health <= 0)
         {
             Destroy(gameObject);
         }
-        if (Time.time - deltaTime > 3 && runOnce)
+        if (Time.time - lastTime > 3 && runOnce)
         {
-            Debug.Log("HALLÅE");
-            animator.SetInteger("state", 1);
+            lastTime = Time.time;
+            setAnimation(1);
             runOnce = !runOnce;
-        } else if (Vector3.Distance (playerPos, enemyPos) < 2) {
-            Debug.Log("HALLÅE IGEEEEN");
-            animator.SetInteger ("state",2);
+        } else if (Vector3.Distance (playerPos, spinePos) < 2) {
+            setAnimation(2);
         }
-
+        if(currentAni == 1 && Time.time - lastTime > 0.6)
+        {   
+            nav.SetDestination(playerPos);
+        }
+        if(currentAni == 2){
+        Vector3 direction = (new Vector3(1,0,0)).normalized;
+        gameObject.GetComponent<Rigidbody>().MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
+        }
     }
 
     void takeDamage()
@@ -64,6 +77,21 @@ public class PlayerlessEnemy : MonoBehaviour
 
     }
 
+    void setAnimation(int ani)
+    {
+        currentAni = ani;
+        if(ani != 1 && ani != 2) {
+            nav.enabled = false;
+        }
+        if(ani == 2)
+        {
+            //strafe mechanics
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            //gameObject.GetComponent<Rigidbody>().MovePosition(hipPos+new Vector3(1,0,0));
+        }
+         
+        animator.SetInteger("state", ani);
+    }
 
     void OnCollisionEnter(Collision coll)
     {
