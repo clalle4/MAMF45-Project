@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class getBoned : MonoBehaviour {
-	private EnemyScript[] ES;
+	private EnemyScriptOld[] ES;
 	private Vector3 position;
 	private bool once;
 	// Use this for initialization
 	void Start () {
-		ES = GetComponentsInParent<EnemyScript> ();
+		ES = GetComponentsInParent<EnemyScriptOld> ();
 	}
 
 	// Update is called once per frame

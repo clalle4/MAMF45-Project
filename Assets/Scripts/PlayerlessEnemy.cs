@@ -7,118 +7,129 @@ public class PlayerlessEnemy : MonoBehaviour
 {
     Animator animator;
     float lastTime;
-    private int health;
     public bool isRagdolled;
-    bool runOnce;
     public GameObject spine;
     public GameObject hip;
     Vector3 spinePos;
     Vector3 hipPos;
     NavMeshAgent nav;
-    int currentAni;
+    int lastState;
+    float nextAttackTime;
 
     //GameObject player;
     Vector3 playerPos;
-    public float movementSpeed = 0.001f;
+    public float movementSpeed = 1;
     // Use this for initialization
     //int runHash = Animator.StringToHash("Run");
 
 
     void Start()
     {
+        lastState = 0;
         nav = gameObject.GetComponent<NavMeshAgent>();
-        runOnce = true;
         //player = GameObject.FindGameObjectWithTag ("MainCamera");
         animator = gameObject.GetComponent<Animator>();
         isRagdolled = false;
-        health = 20;
         lastTime = Time.time;
+        nextAttackTime = 1000;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = new Vector3((float)0.64, (float)1.130198, (float)-1.94); //hård kod, byt ut mot nedre rad för HMD
+        
+        transform.LookAt(playerPos);
+        //Debug.Log("State: "+animator.GetInteger("state"));
+        //Debug.Log("Time: " + Time.time + " AttackTime: " + nextAttackTime + " LastTime: " + lastTime);
+        playerPos = new Vector3(0f, 1.3f, -1.5f); //hårdkod, byt ut mot nedre rad för HMD
         //playerPos = player.transform.position;
         spinePos = spine.transform.position;
-        hipPos = hip.transform.position;   
+        hipPos = hip.transform.position;
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-        if (Time.time - lastTime > 3 && runOnce)
+       
+        if (Time.time - lastTime > 3 && Vector3.Distance(spinePos, playerPos)> 3 && animator.GetInteger("state")!=1)
         {
             lastTime = Time.time;
             setAnimation(1);
-            runOnce = !runOnce;
-        } else if (Vector3.Distance (playerPos, spinePos) < 2) {
+        } else if (Vector3.Distance (playerPos, spinePos) < 2.5f && (animator.GetInteger("state") == 0 || animator.GetInteger("state") == 1)) {
             setAnimation(2);
         }
-        if(currentAni == 1 && Time.time - lastTime > 0.6)
-        {   
-            nav.SetDestination(playerPos);
-        }
-        if(currentAni == 2){
-        Vector3 direction = (new Vector3(1,0,0)).normalized;
-        gameObject.GetComponent<Rigidbody>().MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
-        }
-    }
-
-    void takeDamage()
-    {
-
-
-        if (health <= 0)
+        if(animator.GetInteger("state") == 1 && Time.time - lastTime > 0.6)
         {
-            ragdoll(true);
-            //dö
+            nav.SetDestination(playerPos);
+        }else if (animator.GetInteger("state") == 2)
+        {
+            if(lastState != 2)
+            {
+                nav.SetDestination(new Vector3(1.0f, transform.position.y, playerPos.z + 2f));
+                lastState = 2;
+            }else if(Vector3.Distance(nav.destination, transform.position)< 0.1)
+            {
+                setAnimation(3);
+            }
+        }else if (animator.GetInteger("state") == 3)
+        {
+            if (lastState != 3)
+            {
+                nav.SetDestination(new Vector3(-1.0f, transform.position.y, playerPos.z+2f));
+                lastState = 3;
+            }else if (Vector3.Distance(nav.destination, transform.position) < 0.1)
+            {
+                setAnimation(2);
+            }
+        }
+        if (Time.time > nextAttackTime && animator.GetInteger("state")!=4)
+        {
+            setAnimation(4);
+            lastTime = Time.time;
+            nextAttackTime +=4;
+        }
+        if (animator.GetInteger("state") == 4 && Time.time > lastTime+2)
+        {
+            setAnimation(2);
         }
 
     }
+
+   
 
     void setAnimation(int ani)
     {
-        currentAni = ani;
-        if(ani != 1 && ani != 2) {
-            nav.enabled = false;
-        }
-        if(ani == 2)
+        lastState = animator.GetInteger("state");
+        //nav.enabled = ani==1;
+        if(ani ==2 || ani == 3)
         {
-            //strafe mechanics
-            gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            //gameObject.GetComponent<Rigidbody>().MovePosition(hipPos+new Vector3(1,0,0));
+            nextAttackTime = Time.time + Random.Range(2,4);
+            nav.stoppingDistance = 0;
+            nav.speed = 1f;
+            nav.angularSpeed = 0;
         }
-         
+        else if(ani<2)
+        {
+            nav.stoppingDistance = 2.4f;
+            nav.speed = 3.5f;
+            nav.angularSpeed = 120;
+        } else if (ani == 4) 
+        {
+
+        }
         animator.SetInteger("state", ani);
     }
 
-    void OnCollisionEnter(Collision coll)
-    {
-        GameObject contact = coll.gameObject;
-        if (contact.CompareTag("Damaging"))
-        {
-            health = health - 2;
-            ragdoll(true);
-            Debug.Log("i took dmg");
-        }
-    }
-    //turns ragdolling on/off
-    void ragdoll(bool on)
+    
+    //turns ragdolling on/off, not yet implemented properly.
+    public void ragdoll(bool on)
     {
         if (on)
         {
             Rigidbody[] rb = GetComponentsInChildren<Rigidbody>();
-            Animator a = GetComponent<Animator>();
-            Nav nav = GetComponent<Nav>();
-            a.enabled = false;
-            nav.disabled(true);
+            animator.enabled = false;
+            nav.enabled = false;
             foreach (Rigidbody r in rb)
             {
                 r.useGravity = true;
                 r.isKinematic = false;
             }
-            rb[0].AddForce(new Vector3(0, 100, 0));
         }
         isRagdolled = on;
     }

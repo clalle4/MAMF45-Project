@@ -7,11 +7,11 @@ public class Nav : MonoBehaviour {
 	Animator anim;
 	public GameObject player;
 	NavMeshAgent nav;
-	EnemyScript healthScr;// Use this for initialization
+	EnemyScriptOld healthScr;// Use this for initialization
 
 	void Start () {
 		nav = GetComponent <NavMeshAgent> ();
-		healthScr = GetComponent<EnemyScript> ();
+		healthScr = GetComponent<EnemyScriptOld> ();
 		anim = GetComponent<Animator> ();
 	}
 
