@@ -54,12 +54,14 @@
      <Compile Include="Assets\Scripts\AttackScript.cs" />
      <Compile Include="Assets\Scripts\EnemyScriptOld.cs" />
      <Compile Include="Assets\Scripts\getBoned.cs" />
+     <Compile Include="Assets\Scripts\HitListener.cs" />
      <Compile Include="Assets\Scripts\HPscript.cs" />
      <Compile Include="Assets\Scripts\Levelhandler.cs" />
      <Compile Include="Assets\Scripts\Nav.cs" />
      <Compile Include="Assets\Scripts\PlayerlessEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\StateChanger.cs" />
+     <Compile Include="Assets\Scripts\Weaponstats.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

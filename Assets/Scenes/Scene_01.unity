@@ -841,9 +841,10 @@ GameObject:
   m_Component:
   - component: {fileID: 346063913}
   - component: {fileID: 346063914}
+  - component: {fileID: 346063915}
   m_Layer: 0
   m_Name: MM_Swords_01_01
-  m_TagString: Untagged
+  m_TagString: Damaging
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -855,9 +856,9 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 346063912}
-  m_LocalRotation: {x: -0.6337537, y: -0.51418114, z: -0.45178613, w: 0.36036572}
-  m_LocalPosition: {x: 0.152, y: -0.048, z: 0.001}
-  m_LocalScale: {x: 1.0299516, y: 1.3333338, z: 1.3033826}
+  m_LocalRotation: {x: -0.6337536, y: -0.51418114, z: -0.4517862, w: 0.36036572}
+  m_LocalPosition: {x: 0.15200005, y: -0.04800023, z: 0.0010001548}
+  m_LocalScale: {x: 1.0299523, y: 1.3333348, z: 1.3033834}
   m_Children:
   - {fileID: 1070288338}
   - {fileID: 2007104186}
@@ -866,32 +867,33 @@ Transform:
   m_Father: {fileID: 319675696}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -67.12701, y: 148.679, z: 122.967}
---- !u!205 &346063914
-LODGroup:
+--- !u!54 &346063914
+Rigidbody:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 205095636141374300, guid: c0a47f4d6232ad64689f188253cc939f,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 346063912}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 1.073135, y: -0.00019170344, z: -0.00068061054}
-  m_Size: 2.6085522
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LODs:
-  - screenRelativeHeight: 0.85022587
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 1070288339}
-  - screenRelativeHeight: 0.35094562
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2007104187}
-  - screenRelativeHeight: 0.006347362
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 895407025}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &346063915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 346063912}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c30f0347f90164cb2e2bf012ee719a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &421411159 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100016, guid: 6dac54b24e4037444a8f1837447ce618, type: 3}
@@ -1608,6 +1610,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2844ebf8260a8c149bfe89537ba2f1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &573040105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 573040101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad400cd0a9cc7a4da96b8dc86e99300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &582183640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1633,7 @@ GameObject:
   - component: {fileID: 582183644}
   - component: {fileID: 582183643}
   - component: {fileID: 582183642}
+  - component: {fileID: 582183646}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -1634,7 +1648,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 582183640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.679, z: 0}
+  m_LocalPosition: {x: 0, y: 0.772, z: 0}
   m_LocalScale: {x: 0.6772096, y: 0.6772096, z: 0.6772096}
   m_Children: []
   m_Father: {fileID: 613479574}
@@ -1713,6 +1727,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 582183640}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &582183646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 582183640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5467dd41e501fc443aea98f507b532b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &613479573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1780,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.0026438, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.1399721, z: 0}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -1986,7 +2011,7 @@ GameObject:
   - component: {fileID: 674266640}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Damaging
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2333,7 +2358,7 @@ GameObject:
   - component: {fileID: 987585445}
   - component: {fileID: 987585447}
   m_Layer: 0
-  m_Name: ArcheryWeeble
+  m_Name: PlayerDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3727,15 +3752,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 424880, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.61484116
+      value: -2.089
       objectReference: {fileID: 0}
     - target: {fileID: 424880, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.7797871
+      value: 1.952
       objectReference: {fileID: 0}
     - target: {fileID: 424880, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.248966
+      value: -0.944
       objectReference: {fileID: 0}
     - target: {fileID: 424880, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3777,7 +3802,20 @@ Prefab:
       propertyPath: m_TagString
       value: Damaging
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 470434, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470434, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470434, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 20547192, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1784581339 stripped
