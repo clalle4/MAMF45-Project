@@ -5,12 +5,12 @@ using UnityEngine;
 public class HPscript : MonoBehaviour
 {
 
-    private int health;
+    private float health;
     // Use this for initialization
     void Start()
     {
 
-        health = 20;
+        health = 20f;
     }
 
     // Update is called once per frame
@@ -22,16 +22,21 @@ public class HPscript : MonoBehaviour
             //gameObject.GetComponent<PlayerlessEnemy>().ragdoll(true);
         }
     }
-    public void takeDamage(int dmg)
+    public void takeDamage(float dmg)
     {
 
         health -= dmg;
+        Enemy e = gameObject.GetComponent<Enemy>();
+        if (e != null)
+        {
+            e.setAnimation(5);
+            Debug.Log("ow! "+dmg+" damage!");
+        }
         if (health <= 0)
         {
-            PlayerlessEnemy pe = gameObject.GetComponent<PlayerlessEnemy>();
-            if (pe != null)
+            if (e != null)
             {
-                pe.ragdoll(true);
+                e.ragdoll(true);
             }
             else
             {

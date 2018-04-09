@@ -10,21 +10,15 @@ public class StateChanger : StateMachineBehaviour {
     //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        if (animator.GetInteger("state") == 2)
-        {
-            animator.SetInteger("state", 3);
-        }
-        else if (animator.GetInteger("state") == 3)
-        {
-            animator.SetInteger("state", 2);
-        }
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     //
     //}
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        animator.SetInteger("state", 2);
+    }
+
 
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
