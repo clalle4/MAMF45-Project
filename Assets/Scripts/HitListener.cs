@@ -21,7 +21,7 @@ public class HitListener : MonoBehaviour {
         if (contact.CompareTag("Damaging"))
         {
             
-        //Debug.Log(" at velocity: "+coll.gameObject.GetComponent<Rigidbody>().velocity);
+			Debug.Log(" at velocity: "+coll.gameObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate());
             gameObject.GetComponentsInParent<HPscript>()[0].takeDamage(contact.GetComponent<Weaponstats>().getDamage());
         }
     }

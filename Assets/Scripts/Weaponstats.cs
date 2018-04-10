@@ -6,6 +6,10 @@ public class Weaponstats : MonoBehaviour {
     public float damage = 10f;
     public bool complexDamage = false;
 	// Use this for initialization
+
+
+
+
 	void Start () {
 		
 	}
@@ -14,6 +18,13 @@ public class Weaponstats : MonoBehaviour {
 	void Update () {
         
 	}
+
+	public void detach() {
+		gameObject.transform.parent = null;
+	}
+
+
+
     public float getDamage()
     {
         if (!complexDamage)
@@ -22,8 +33,10 @@ public class Weaponstats : MonoBehaviour {
         }
         else
         {
-            Vector3 vel = gameObject.GetComponent<Rigidbody>().velocity;
-            return Mathf.Sqrt(Mathf.Pow(vel.x, 2f) + Mathf.Pow(vel.y, 2f) + Mathf.Pow(vel.z, 2f)) * damage;
-        }
+            //Vector3 vel = gameObject.GetComponent<Rigidbody>().velocity;
+			Vector3 vel = gameObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate();
+			return Mathf.Sqrt(Mathf.Pow(vel.x, 2f) + Mathf.Pow(vel.y, 2f) + Mathf.Pow(vel.z, 2f)) * damage;
+        	
+		}
     }
 }

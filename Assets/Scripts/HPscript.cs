@@ -18,31 +18,34 @@ public class HPscript : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             //gameObject.GetComponent<PlayerlessEnemy>().ragdoll(true);
         }
     }
-    public void takeDamage(float dmg)
+	public void takeDamage(float dmg)
     {
 
         health -= dmg;
         Enemy e = gameObject.GetComponent<Enemy>();
         if (e != null)
-        {
-            e.setAnimation(5);
-            Debug.Log("ow! "+dmg+" damage!");
-        }
+		{ 
+			e.setAnimation (5);
+			if (dmg * 10 > health) {	
+			}
+			Debug.Log ("ow! " + dmg + " damage!");
+		}
         if (health <= 0)
         {
             if (e != null)
             {
-                e.ragdoll(true);
+				Debug.Log ("am ragdoll now");
+                e.ragdoll();
             }
             else
             {
+				Debug.Log ("Am destroyed nowz. am sad.");
                 Destroy(gameObject);
             }
-            //dö
         }
 
     }
