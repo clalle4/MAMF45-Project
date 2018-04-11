@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    Animator animator;
+	Valve.VR.InteractionSystem.Throwable[] throws;
+	Animator animator;
     float lastTime;
     public GameObject spine;
     public GameObject hip;
@@ -24,6 +25,10 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		throws = gameObject.GetComponents<Valve.VR.InteractionSystem.Throwable> ();
+		foreach (Valve.VR.InteractionSystem.Throwable t in throws){
+			t.enabled = false;
+		}
 		isRagdolled = false;
         lastState = 0;
         nav = gameObject.GetComponent<NavMeshAgent>();
@@ -45,7 +50,7 @@ public class Enemy : MonoBehaviour
 			spinePos = spine.transform.position;
 			hipPos = hip.transform.position;
 			//Debug.Log ("Time: " + Time.time + " LastTime: " + lastTime);
-			if (animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f) {
+			if ((animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f)||(animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f)) {
 				setAnimation (2);
 			}
 
@@ -100,12 +105,15 @@ public class Enemy : MonoBehaviour
 		} else if (ani == 4) {
 			lastTime = Time.time;
 			nextAttackTime += 10;
-		}
-        else if (ani == 5)
-        {
-            nav.stoppingDistance = 0;
-            nav.speed = 0;
-            nav.angularSpeed = 0;
+		} else if (ani == 5) {
+			nav.stoppingDistance = 0;
+			nav.speed = 0;
+			nav.angularSpeed = 0;
+			lastTime = Time.time;
+		} else if (ani == 6) {
+			nav.stoppingDistance = 0;
+			nav.speed = 0;
+			nav.angularSpeed = 0;
 			lastTime = Time.time;
 		}
         animator.SetInteger("state", ani);
@@ -129,6 +137,10 @@ public class Enemy : MonoBehaviour
                 r.isKinematic = false;
             }
 		//gameObject.transform.GetComponent<Rigidbody> ().AddForce (spine.transform.position + new Vector3 (0, 100, -10000)); //(1000f, spine.transform.position+new Vector3(0,0,-1), 5f,1f);
+		foreach (Valve.VR.InteractionSystem.Throwable t in throws){
+			t.enabled = true;
+		}
 		isRagdolled = true;
+		gameObject.tag = "Dead";
     	}
 }

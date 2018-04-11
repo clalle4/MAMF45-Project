@@ -24,13 +24,12 @@ public class HPscript : MonoBehaviour
     }
 	public void takeDamage(float dmg)
     {
-
+		Enemy e = gameObject.GetComponent<Enemy>();
         health -= dmg;
-        Enemy e = gameObject.GetComponent<Enemy>();
         if (e != null)
 		{ 
-			e.setAnimation (5);
 			if (dmg * 10 > health) {	
+				e.setAnimation (5);
 			}
 			Debug.Log ("ow! " + dmg + " damage!");
 		}
@@ -49,4 +48,10 @@ public class HPscript : MonoBehaviour
         }
 
     }
+	public void stun(){
+		Enemy e = gameObject.GetComponent<Enemy>();
+		if (e != null) {
+			e.setAnimation (6);
+		}
+	}
 }
