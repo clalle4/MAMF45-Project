@@ -6,21 +6,19 @@ public class HPscript : MonoBehaviour
 {
 
     private float health;
+    private bool alive;
+
     // Use this for initialization
     void Start()
     {
 
         health = 20f;
+        alive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            //Destroy(gameObject);
-            //gameObject.GetComponent<PlayerlessEnemy>().ragdoll(true);
-        }
     }
 	public void takeDamage(float dmg)
     {
@@ -33,8 +31,9 @@ public class HPscript : MonoBehaviour
 			}
 			Debug.Log ("ow! " + dmg + " damage!");
 		}
-        if (health <= 0)
+        if (health <= 0 && alive)
         {
+            alive = false;
             if (e != null)
             {
 				Debug.Log ("am ragdoll now");

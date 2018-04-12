@@ -119,8 +119,6 @@ public class Enemy : MonoBehaviour
         animator.SetInteger("state", ani);
     }
 
-
-    //turns ragdolling on/off, not yet implemented properly.
     public void ragdoll()
     {
             Rigidbody[] rb = GetComponentsInChildren<Rigidbody>();
