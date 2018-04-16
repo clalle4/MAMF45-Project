@@ -50,8 +50,15 @@ public class Enemy : MonoBehaviour
 			spinePos = spine.transform.position;
 			hipPos = hip.transform.position;
 			//Debug.Log ("Time: " + Time.time + " LastTime: " + lastTime);
-			if ((animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f)||(animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f)) {
+			if ((animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f)||(animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f)||((animator.GetInteger ("state") == 7 || (animator.GetInteger ("state") == 8)) && Time.time > lastTime+0.3f)) {
 				setAnimation (2);
+			}
+			if (animator.GetInteger ("state") == 7 && lastState != 7) {
+				lastState = 7;
+				nav.SetDestination (spinePos - new Vector3 (0, 0, -0.5f));
+			} else if(animator.GetInteger ("state") == 8 && lastState != 8){
+				lastState = 8;
+				nav.SetDestination (spinePos - new Vector3 (0, 0, -1f));
 			}
 
 			if (Time.time - lastTime > 3 && Vector3.Distance (spinePos, playerPos) > 3 && animator.GetInteger ("state") != 1) {
@@ -113,6 +120,15 @@ public class Enemy : MonoBehaviour
 		} else if (ani == 6) {
 			nav.stoppingDistance = 0;
 			nav.speed = 0;
+			nav.angularSpeed = 0;
+			lastTime = Time.time;
+		} else if (ani == 7) {
+			nav.stoppingDistance = 0;
+			nav.speed = 5f;
+			nav.angularSpeed = 0;
+		} else if (ani == 8) {
+			nav.stoppingDistance = 0;
+			nav.speed = 5f;
 			nav.angularSpeed = 0;
 			lastTime = Time.time;
 		}
