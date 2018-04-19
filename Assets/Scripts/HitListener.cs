@@ -5,7 +5,6 @@ using UnityEngine;
 public class HitListener : MonoBehaviour {
 	public bool isWeapon = false;
 	public bool isShield = false;
-	float lastBlock;
 	// Use this for initialization
 	void Start () {
 		
