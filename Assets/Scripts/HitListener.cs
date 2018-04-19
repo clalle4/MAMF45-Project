@@ -10,7 +10,7 @@ public class HitListener : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	// Update is called once per framew
 	void Update () {
 		
 	}
@@ -18,16 +18,17 @@ public class HitListener : MonoBehaviour {
     void OnCollisionEnter(Collision coll)
 	{
 		GameObject contact = coll.gameObject;
-		Debug.Log ("collided with: " + contact.gameObject.tag);
+		//Debug.Log ("collided with: " + contact.gameObject.tag);
 		if (!isWeapon && !isShield) {
 			if (contact.CompareTag ("Damaging")) {
+                Debug.Log("took dmg");
             	gameObject.GetComponentsInParent<HPscript> () [0].takeDamage (contact.GetComponent<Weaponstats> ().getDamage ());
 			}
 		} else if (isWeapon) {
 			if (contact.CompareTag ("Shield")) {
 				gameObject.GetComponentsInParent<HPscript> () [0].stun ();
 			}
-		} else {
+		} else if (isShield){
 			if (contact.CompareTag ("Damaging")) {
 				gameObject.GetComponentsInParent<HPscript> () [0].block (contact.GetComponent<Weaponstats> ().getDamage ());
 			}

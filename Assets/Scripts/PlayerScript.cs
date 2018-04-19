@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
-	public BloodSplatterEffect bloodEffect;
+	//public BloodSplatterEffect bloodEffect;
 
 	private int health;
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		bloodEffect.BloodSplatter ();
+		//bloodEffect.BloodSplatter ();
 	}
 
 	public bool hurt(int damage){

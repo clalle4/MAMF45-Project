@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
         lastState = animator.GetInteger("state");
         //nav.enabled = ani==1;
 		if (ani == 2 || ani == 3) {
-			nextAttackTime = Time.time + Random.Range (2, 4);
+			nextAttackTime = Time.time + Random.Range (1, 3);
 			nav.stoppingDistance = 0;
 			nav.speed = 1f;
 			nav.angularSpeed = 0;
