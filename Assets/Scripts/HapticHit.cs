@@ -12,12 +12,12 @@ public class HapticHit : MonoBehaviour {
         Hand holdingHand = GetComponentInParent<Hand>();
         if (holdingHand)
         {
-            SteamVR_Controller.Device controller = holdingHand.controller;
-            controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis0);
-            controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis1);
-            controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis2);
-            controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis3);
-            controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis4);
+           // SteamVR_Controller.Device controller = holdingHand.controller;
+            //controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis0);
+            //controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis1);
+            //controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis2);
+            //controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis3);
+            //controller.TriggerHapticPulse(50000, EVRButtonId.k_EButton_Axis4);
 
         }
         else {
