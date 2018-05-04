@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
 			//Debug.Log("Time: " + Time.time + " AttackTime: " + nextAttackTime + " LastTime: " + lastTime);
 			//playerPos = new Vector3(0f, 1.3f, -1.5f); //hårdkod, byt ut mot nedre rad för HMD
 			playerPos = player.transform.position;
-			transform.LookAt (playerPos - new Vector3 (0, playerPos.y - 1.3f, 0));
+			transform.LookAt (playerPos - new Vector3 (0, playerPos.y - 1.8f, 0));
 			spinePos = spine.transform.position;
 			hipPos = hip.transform.position;
 			//Debug.Log ("Time: " + Time.time + " LastTime: " + lastTime);

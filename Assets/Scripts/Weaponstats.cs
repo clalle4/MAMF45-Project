@@ -20,7 +20,7 @@ public class Weaponstats : MonoBehaviour {
 	}
 
 	public void detach() {
-		gameObject.transform.parent = null;
+	    gameObject.transform.parent = null;
 	}
 
 
