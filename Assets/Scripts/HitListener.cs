@@ -31,7 +31,7 @@ public class HitListener : MonoBehaviour {
                 gameObject.GetComponentsInParent<HPscript>()[0].stun();
                 iframetime = Time.time;
             }
-            else if (contact.CompareTag("Player") && iframetime < Time.time - 2f)
+            else if (contact.CompareTag("Player") && iframetime < Time.time - 1f)
             {
                 iframetime = Time.time;
                 Debug.Log("i took dmg from enemy lel");

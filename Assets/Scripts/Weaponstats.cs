@@ -24,7 +24,10 @@ public class Weaponstats : MonoBehaviour {
 		gameObject.transform.parent = null;
 	}
 
-
+    public void deactivateWeapon ()
+    {
+        damage = 0;
+    }
 
     public float getDamage()
     {

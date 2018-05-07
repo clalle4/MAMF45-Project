@@ -46,6 +46,11 @@ public class HPscript : MonoBehaviour
                 if (health <= 0 && alive)
                 {
                     alive = false;
+                    Weaponstats[] w = gameObject.GetComponentsInChildren<Weaponstats>();
+                    foreach (Weaponstats we in w)
+                    {
+                        we.deactivateWeapon();
+                    }
                     if (e != null)
                     {
                         //Debug.Log("am ragdoll now");
