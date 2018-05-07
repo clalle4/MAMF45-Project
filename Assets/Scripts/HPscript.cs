@@ -18,6 +18,11 @@ public class HPscript : MonoBehaviour
         alive = true;
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,7 +60,12 @@ public class HPscript : MonoBehaviour
             }
         } else {
             health -= dmg;
-            Debug.Log("ow! " + dmg + " damage! Im the player lel!");
+            Debug.Log("Playerhealth is: " + health);
+            if (health <= 0)
+            {
+                Debug.Log("player dead. am not sad.");
+            }
+            //Debug.Log("ow! " + dmg + " damage! Im the player lel!");
         }
     }
 	public void stun(){
@@ -64,7 +74,7 @@ public class HPscript : MonoBehaviour
 			e.setAnimation (6);
 		}
 	}
-
+    
 	public void block(float f) {
 		lastBlock = Time.time;
 		Enemy e = gameObject.GetComponent<Enemy> ();

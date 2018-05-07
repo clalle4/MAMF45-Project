@@ -5,6 +5,7 @@ using UnityEngine;
 public class Levelhandler : MonoBehaviour {
 	public int nbrEnemiesStock;
 	public GameObject enemy;
+    public GameObject player;
 	// Use this for initialization
 	void Start () {
 	}
@@ -16,6 +17,11 @@ public class Levelhandler : MonoBehaviour {
 		if (enemies.Length < 1 && nbrEnemiesStock != 0) {
 			spawnEnemy ();
 		}
+        if (player.GetComponent<HPscript>().getHealth() <= 0)
+        {
+            Color darkRed = new Color(0.15f, 0f, 0f);
+            SteamVR_Fade.Start(darkRed, 3f);
+        } 
 	}
 	void spawnEnemy(){
 		nbrEnemiesStock--;

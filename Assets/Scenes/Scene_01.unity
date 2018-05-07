@@ -841,6 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   complexDamage: 1
+  playerWeapon: 0
 --- !u!144 &306274174
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2374,6 +2375,24 @@ Prefab:
       propertyPath: m_TagString
       value: Damaging
       objectReference: {fileID: 0}
+    - target: {fileID: 4729384557715548, guid: f6c3b8d060e357642a8e2f529dbeb3d1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.1030009
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631242744469896, guid: f6c3b8d060e357642a8e2f529dbeb3d1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114773926105845076, guid: f6c3b8d060e357642a8e2f529dbeb3d1,
+        type: 2}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114773926105845076, guid: f6c3b8d060e357642a8e2f529dbeb3d1,
+        type: 2}
+      propertyPath: complexDamage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6c3b8d060e357642a8e2f529dbeb3d1, type: 2}
   m_IsPrefabParent: 0
@@ -3186,10 +3205,9 @@ GameObject:
   - component: {fileID: 1548807978}
   - component: {fileID: 1548807977}
   - component: {fileID: 1548807976}
-  - component: {fileID: 1548807979}
   m_Layer: 27
   m_Name: BodyCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3219,7 +3237,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3250,19 +3268,6 @@ CapsuleCollider:
   m_Height: 1.3561376
   m_Direction: 1
   m_Center: {x: 0, y: -0.02066943, z: 0}
---- !u!114 &1548807979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1548807974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5467dd41e501fc443aea98f507b532b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWeapon: 0
-  isShield: 0
 --- !u!1 &1579673308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,6 +3673,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114014757579599184, guid: c5191515b67d6b441822ed2abe96c612,
+        type: 2}
+      propertyPath: playerWeapon
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65465978121873916, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
     - {fileID: 65806016873847458, guid: c5191515b67d6b441822ed2abe96c612, type: 2}
@@ -3851,6 +3861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   complexDamage: 0
+  playerWeapon: 0
 --- !u!4 &1917387554 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 9bd5e19207ad09747862e0c2c7a09b2c, type: 3}
@@ -3918,6 +3929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nbrEnemiesStock: 1
   enemy: {fileID: 1631242744469896, guid: f6c3b8d060e357642a8e2f529dbeb3d1, type: 2}
+  player: {fileID: 573040101}
 --- !u!4 &1988878687
 Transform:
   m_ObjectHideFlags: 0
@@ -4018,7 +4030,6 @@ GameObject:
   - component: {fileID: 2105700293}
   - component: {fileID: 2105700297}
   - component: {fileID: 2105700298}
-  - component: {fileID: 2105700299}
   - component: {fileID: 2105700292}
   m_Layer: 0
   m_Name: VRCamera
@@ -4147,19 +4158,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2105700299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105700290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5467dd41e501fc443aea98f507b532b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWeapon: 0
-  isShield: 0
 --- !u!1 &2115806465
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weaponstats : MonoBehaviour {
     public float damage = 10f;
     public bool complexDamage = false;
+    public bool playerWeapon = false;
 	// Use this for initialization
 
 
@@ -31,12 +32,15 @@ public class Weaponstats : MonoBehaviour {
         {
             return damage;
         }
-        else
+        else if (playerWeapon && complexDamage)
         {
             //Vector3 vel = gameObject.GetComponent<Rigidbody>().velocity;
 			Vector3 vel = gameObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate();
 			return Mathf.Sqrt(Mathf.Pow(vel.x, 2f) + Mathf.Pow(vel.y, 2f) + Mathf.Pow(vel.z, 2f)) * damage;
         	
-		}
+		} else
+        {
+            return 0f;
+        }
     }
 }
