@@ -6,47 +6,75 @@ public class HPscript : MonoBehaviour
 {
 
     private float health;
+    private bool alive;
+	float lastBlock;
+    public bool isPlayer;
+
     // Use this for initialization
     void Start()
     {
-
+		lastBlock = 0f;
         health = 20f;
+        alive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            //Destroy(gameObject);
-            //gameObject.GetComponent<PlayerlessEnemy>().ragdoll(true);
-        }
     }
 	public void takeDamage(float dmg)
     {
-
-        health -= dmg;
-        Enemy e = gameObject.GetComponent<Enemy>();
-        if (e != null)
-		{ 
-			e.setAnimation (5);
-			if (dmg * 10 > health) {	
-			}
-			Debug.Log ("ow! " + dmg + " damage!");
-		}
-        if (health <= 0)
+        if (!isPlayer)
         {
-            if (e != null)
+            if (Time.time > lastBlock + 1.0f)
             {
-				Debug.Log ("am ragdoll now");
-                e.ragdoll();
+                Enemy e = gameObject.GetComponent<Enemy>();
+                health -= dmg;
+                if (e != null)
+                {
+                    if (dmg * 10 > health)
+                    {
+                        e.setAnimation(5);
+                    }
+                    //Debug.Log("ow! " + dmg + " damage!");
+                }
+                if (health <= 0 && alive)
+                {
+                    alive = false;
+                    if (e != null)
+                    {
+                        //Debug.Log("am ragdoll now");
+                        e.ragdoll();
+                    }
+                    else
+                    {
+                        //Debug.Log("Am destroyed nowz. am sad.");
+                        Destroy(gameObject);
+                    }
+                }
             }
-            else
-            {
-				Debug.Log ("Am destroyed nowz. am sad.");
-                Destroy(gameObject);
-            }
+        } else {
+            health -= dmg;
+            Debug.Log("ow! " + dmg + " damage! Im the player lel!");
         }
-
     }
+	public void stun(){
+		Enemy e = gameObject.GetComponent<Enemy>();
+		if (e != null) {
+			e.setAnimation (6);
+		}
+	}
+
+	public void block(float f) {
+		lastBlock = Time.time;
+		Enemy e = gameObject.GetComponent<Enemy> ();
+		if (e != null) {
+			if (f > 5f) {
+				e.setAnimation (7);
+			}
+			else {
+				e.setAnimation(8);
+			}
+		}
+	}
 }

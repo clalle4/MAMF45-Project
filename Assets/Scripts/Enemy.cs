@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    Animator animator;
+	Valve.VR.InteractionSystem.Throwable[] throws;
+	Animator animator;
     float lastTime;
     public GameObject spine;
     public GameObject hip;
@@ -24,6 +25,10 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		throws = gameObject.GetComponents<Valve.VR.InteractionSystem.Throwable> ();
+		foreach (Valve.VR.InteractionSystem.Throwable t in throws){
+			t.enabled = false;
+		}
 		isRagdolled = false;
         lastState = 0;
         nav = gameObject.GetComponent<NavMeshAgent>();
@@ -41,12 +46,19 @@ public class Enemy : MonoBehaviour
 			//Debug.Log("Time: " + Time.time + " AttackTime: " + nextAttackTime + " LastTime: " + lastTime);
 			//playerPos = new Vector3(0f, 1.3f, -1.5f); //hårdkod, byt ut mot nedre rad för HMD
 			playerPos = player.transform.position;
-			transform.LookAt (playerPos - new Vector3 (0, playerPos.y - 1.3f, 0));
+			transform.LookAt (playerPos - new Vector3 (0, playerPos.y - 1.7f, 0));
 			spinePos = spine.transform.position;
 			hipPos = hip.transform.position;
 			//Debug.Log ("Time: " + Time.time + " LastTime: " + lastTime);
-			if (animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f) {
+			if ((animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f)||(animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f)||((animator.GetInteger ("state") == 7 || (animator.GetInteger ("state") == 8)) && Time.time > lastTime+0.3f)) {
 				setAnimation (2);
+			}
+			if (animator.GetInteger ("state") == 7 && lastState != 7) {
+				lastState = 7;
+				nav.SetDestination (spinePos - new Vector3 (0, 0, -0.5f));
+			} else if(animator.GetInteger ("state") == 8 && lastState != 8){
+				lastState = 8;
+				nav.SetDestination (spinePos - new Vector3 (0, 0, -1f));
 			}
 
 			if (Time.time - lastTime > 3 && Vector3.Distance (spinePos, playerPos) > 3 && animator.GetInteger ("state") != 1) {
@@ -89,7 +101,7 @@ public class Enemy : MonoBehaviour
         lastState = animator.GetInteger("state");
         //nav.enabled = ani==1;
 		if (ani == 2 || ani == 3) {
-			nextAttackTime = Time.time + Random.Range (2, 4);
+			nextAttackTime = Time.time + Random.Range (1, 3);
 			nav.stoppingDistance = 0;
 			nav.speed = 1f;
 			nav.angularSpeed = 0;
@@ -100,19 +112,29 @@ public class Enemy : MonoBehaviour
 		} else if (ani == 4) {
 			lastTime = Time.time;
 			nextAttackTime += 10;
-		}
-        else if (ani == 5)
-        {
-            nav.stoppingDistance = 0;
-            nav.speed = 0;
-            nav.angularSpeed = 0;
+		} else if (ani == 5) {
+			nav.stoppingDistance = 0;
+			nav.speed = 0;
+			nav.angularSpeed = 0;
+			lastTime = Time.time;
+		} else if (ani == 6) {
+			nav.stoppingDistance = 0;
+			nav.speed = 0;
+			nav.angularSpeed = 0;
+			lastTime = Time.time;
+		} else if (ani == 7) {
+			nav.stoppingDistance = 0;
+			nav.speed = 5f;
+			nav.angularSpeed = 0;
+		} else if (ani == 8) {
+			nav.stoppingDistance = 0;
+			nav.speed = 5f;
+			nav.angularSpeed = 0;
 			lastTime = Time.time;
 		}
         animator.SetInteger("state", ani);
     }
 
-
-    //turns ragdolling on/off, not yet implemented properly.
     public void ragdoll()
     {
             Rigidbody[] rb = GetComponentsInChildren<Rigidbody>();
@@ -129,6 +151,10 @@ public class Enemy : MonoBehaviour
                 r.isKinematic = false;
             }
 		//gameObject.transform.GetComponent<Rigidbody> ().AddForce (spine.transform.position + new Vector3 (0, 100, -10000)); //(1000f, spine.transform.position+new Vector3(0,0,-1), 5f,1f);
+		foreach (Valve.VR.InteractionSystem.Throwable t in throws){
+			t.enabled = true;
+		}
 		isRagdolled = true;
+		gameObject.tag = "Dead";
     	}
 }
