@@ -6,11 +6,13 @@ public class HitListener : MonoBehaviour {
 	public bool isWeapon = false;
 	public bool isShield = false;
     private float iframetime;
+    private Color darkRed = new Color(0.15f, 0f, 0f);
+    private Color transparent = new Color(0, 0, 0, 0);
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         iframetime = Time.time;
-	}
+    }
 	
 	// Update is called once per framew
 	void Update () {
@@ -35,7 +37,9 @@ public class HitListener : MonoBehaviour {
             {
                 iframetime = Time.time;
                 Debug.Log("i took dmg from enemy lel");
+                SteamVR_Fade.Start(darkRed, 0.75f);
                 contact.GetComponentsInParent<HPscript>()[0].takeDamage(gameObject.GetComponent<Weaponstats>().getDamage());
+                Invoke("fadeToTransparent", 0.25f);
             }
         } else if (isShield){
 			if (contact.CompareTag ("Damaging")) {
@@ -43,4 +47,10 @@ public class HitListener : MonoBehaviour {
 			}
 		}
 	}
+
+    public void fadeToTransparent()
+    {
+        SteamVR_Fade.Start(transparent, 0.5f);
+    }
+
 }

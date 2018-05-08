@@ -9,6 +9,7 @@ public class HPscript : MonoBehaviour
     private bool alive;
 	float lastBlock;
     public bool isPlayer;
+    public AudioSource aS;
 
     // Use this for initialization
     void Start()
@@ -16,6 +17,7 @@ public class HPscript : MonoBehaviour
 		lastBlock = 0f;
         health = 20f;
         alive = true;
+        aS = GetComponent<AudioSource>();
     }
 
     public float getHealth()
@@ -76,12 +78,23 @@ public class HPscript : MonoBehaviour
 	public void stun(){
 		Enemy e = gameObject.GetComponent<Enemy>();
 		if (e != null) {
+            aS.Play();
+            if (e.getAnimation() == 4)
+            {
 			e.setAnimation (6);
-		}
+            } else if (e.getAnimation() == 9)
+            {
+                e.setAnimation(10);
+            } else if (e.getAnimation() == 11)
+            {
+                e.setAnimation(12);
+            }
+        }
 	}
     
 	public void block(float f) {
 		lastBlock = Time.time;
+        aS.Play();
 		Enemy e = gameObject.GetComponent<Enemy> ();
 		if (e != null) {
 			if (f > 5f) {

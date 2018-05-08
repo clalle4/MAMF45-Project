@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
 			spinePos = spine.transform.position;
 			hipPos = hip.transform.position;
 			//Debug.Log ("Time: " + Time.time + " LastTime: " + lastTime);
-			if ((animator.GetInteger ("state") == 5 && Time.time > lastTime + 0.9f)||(animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f)||((animator.GetInteger ("state") == 7 || (animator.GetInteger ("state") == 8)) && Time.time > lastTime+0.3f)) {
+			if ((animator.GetInteger("state") == 5 && Time.time > lastTime + 0.9f)||((animator.GetInteger ("state") == 6 && Time.time > lastTime + 0.18f || animator.GetInteger("state") == 10 && Time.time > lastTime + 0.1f || animator.GetInteger("state") == 12 && Time.time > lastTime + 0.05f) )||((animator.GetInteger ("state") == 7 || (animator.GetInteger ("state") == 8)) && Time.time > lastTime+0.3f)) {
 				setAnimation (2);
 			}
 			if (animator.GetInteger ("state") == 7 && lastState != 7) {
@@ -84,10 +84,22 @@ public class Enemy : MonoBehaviour
 					setAnimation (2);
 				}
 			}
-			if (Time.time > nextAttackTime && animator.GetInteger ("state") != 4) {
-				setAnimation (4);
-			}
-			if (animator.GetInteger ("state") == 4 && Time.time > lastTime + 2) {
+			if (Time.time > nextAttackTime && animator.GetInteger ("state") != 4 && animator.GetInteger("state") != 9 && animator.GetInteger("state") != 11) {
+                int rand = Random.Range(0, 3);
+                if(rand == 0)
+                {
+                setAnimation (4);
+                }
+                else if (rand == 1)
+                {
+                    setAnimation(9);
+                }
+                else
+                {
+                 setAnimation(11);
+                }
+            }
+			if ((animator.GetInteger("state") == 4 || animator.GetInteger("state") == 9 || animator.GetInteger("state") == 11) && Time.time > lastTime + 1) {
 				setAnimation (2);
 			}
 		}
@@ -109,15 +121,10 @@ public class Enemy : MonoBehaviour
 			nav.stoppingDistance = 2.4f;
 			nav.speed = 3.5f;
 			nav.angularSpeed = 120;
-		} else if (ani == 4) {
+		} else if (ani == 4 || ani == 9 || ani == 11) {
 			lastTime = Time.time;
 			nextAttackTime += 10;
-		} else if (ani == 5) {
-			nav.stoppingDistance = 0;
-			nav.speed = 0;
-			nav.angularSpeed = 0;
-			lastTime = Time.time;
-		} else if (ani == 6) {
+		} else if (ani == 5 || ani == 6 || ani == 10 || ani == 12) {
 			nav.stoppingDistance = 0;
 			nav.speed = 0;
 			nav.angularSpeed = 0;
@@ -133,6 +140,10 @@ public class Enemy : MonoBehaviour
 			lastTime = Time.time;
 		}
         animator.SetInteger("state", ani);
+    }
+    public int getAnimation()
+    {
+        return animator.GetInteger("state");
     }
 
     public void ragdoll()
