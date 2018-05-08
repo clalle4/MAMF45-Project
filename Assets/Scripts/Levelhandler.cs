@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Levelhandler : MonoBehaviour {
-	public int enemyLevel;
+	public int nbrEnemiesStock;
 	public GameObject enemy;
     public GameObject player;
     public GUIText dieText;
@@ -19,11 +19,10 @@ public class Levelhandler : MonoBehaviour {
 	void Update () {
 		GameObject[] enemies;
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		if (enemies.Length < nbrEnemies) {
+		if (enemies.Length < nbrEnemies && nbrEnemiesStock != 0) {
 			GameObject enemy = spawnEnemy ();
 
-
-        }
+		}
         if (player.GetComponent<HPscript>().getHealth() <= 0)
         {
             Color darkRed = new Color(0.15f, 0f, 0f);
@@ -32,7 +31,7 @@ public class Levelhandler : MonoBehaviour {
 	}
 
 	GameObject spawnEnemy(){
-		//nbrEnemiesStock++;
+		nbrEnemiesStock--;
 		return Instantiate (enemy);
 	}
 }
