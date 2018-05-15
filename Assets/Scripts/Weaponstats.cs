@@ -6,6 +6,8 @@ public class Weaponstats : MonoBehaviour {
     public float damage = 10f;
     public bool complexDamage = false;
     public bool playerWeapon = false;
+    public bool playerShield = false;
+    public Text hpText;
 	// Use this for initialization
 
 
