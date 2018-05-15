@@ -7,7 +7,7 @@ public class Levelhandler : MonoBehaviour {
 	public int nbrEnemiesStock;
 	public GameObject enemy;
     public GameObject player;
-    public GUIText dieText;
+    public Text dieText;
     public int nbrEnemies;
 
     // Use this for initialization
@@ -27,6 +27,13 @@ public class Levelhandler : MonoBehaviour {
         {
             Color darkRed = new Color(0.15f, 0f, 0f);
             SteamVR_Fade.Start(darkRed, 3f);
+            if (nbrEnemiesStock > 9)
+            {
+                dieText.text = "You are a shame to your king and country\n You killed 0 enemies\n No valhalla 4 u";
+            } else
+            {
+                dieText.text = "You fought gloriously, and killed " + (nbrEnemies - 1) + " enemies!";
+            }
         } 
 	}
 

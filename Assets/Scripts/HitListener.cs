@@ -5,6 +5,11 @@ using UnityEngine;
 public class HitListener : MonoBehaviour {
 	public bool isWeapon = false;
 	public bool isShield = false;
+
+    public GameObject playerShield;
+    public AudioClip shieldSound1;
+    public AudioClip shieldSound2;
+
     private float iframetime;
     private Color darkRed = new Color(0.15f, 0f, 0f);
     private Color transparent = new Color(0, 0, 0, 0);
@@ -32,6 +37,7 @@ public class HitListener : MonoBehaviour {
             if (contact.CompareTag("Shield")) {
                 gameObject.GetComponentsInParent<HPscript>()[0].stun();
                 iframetime = Time.time;
+                playerShield.GetComponent<AudioSource>().PlayOneShot(shieldSound1, 1f);
             }
             else if (contact.CompareTag("Player") && iframetime < Time.time - 1f)
             {
