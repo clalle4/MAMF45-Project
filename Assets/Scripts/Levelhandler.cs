@@ -3,36 +3,48 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Levelhandler : MonoBehaviour {
-	public int enemyLevel;
-	public GameObject enemy;
+public class Levelhandler : MonoBehaviour
+{
+    public int nbrEnemiesStock;
+    public GameObject enemy;
     public GameObject player;
-    public GUIText dieText;
+    public Text dieText;
     public int nbrEnemies;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         dieText.text = "";
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		GameObject[] enemies;
-		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		if (enemies.Length < nbrEnemies) {
-			GameObject enemy = spawnEnemy ();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length < nbrEnemies && nbrEnemiesStock != 0)
+        {
+            GameObject enemy = spawnEnemy();
 
         }
         if (player.GetComponent<HPscript>().getHealth() <= 0)
         {
             Color darkRed = new Color(0.15f, 0f, 0f);
             SteamVR_Fade.Start(darkRed, 3f);
-        } 
-	}
+            if (nbrEnemiesStock > 9)
+            {
+                dieText.text = "You are a shame to your king and country\n You killed 0 enemies\n No valhalla 4 u";
+            }
+            else
+            {
+                dieText.text = "You fought gloriously, and killed " + (nbrEnemies - 1) + " enemies!";
+            }
+        }
+    }
 
-	GameObject spawnEnemy(){
-		//nbrEnemiesStock++;
-		return Instantiate (enemy);
-	}
+    GameObject spawnEnemy()
+    {
+        nbrEnemiesStock--;
+        return Instantiate(enemy);
+    }
 }
