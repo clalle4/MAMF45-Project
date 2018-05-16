@@ -31,13 +31,13 @@ public class Levelhandler : MonoBehaviour
         {
             Color darkRed = new Color(0.15f, 0f, 0f);
             SteamVR_Fade.Start(darkRed, 3f);
-            if (nbrEnemiesStock > 9)
+            if (nbrEnemiesStock > 19)
             {
-                dieText.text = "You are a shame to your king and country\n You killed 0 enemies\n No valhalla 4 u";
+                dieText.text = "You are a shame to\n your king and country\n You killed 0 enemies\n No valhalla 4 u";
             }
             else
             {
-                dieText.text = "You fought gloriously, and killed " + (nbrEnemies - 1) + " enemies!";
+                dieText.text = "You fought gloriously, and killed\n " + (20 - nbrEnemiesStock) + " \nenemies!";
             }
         }
     }

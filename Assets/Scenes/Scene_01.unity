@@ -122,7 +122,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.06
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -156,6 +156,10 @@ Prefab:
       propertyPath: m_Name
       value: idle_soldier1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6f507fb73d17bee48bc512ac7de71e63, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
   m_IsPrefabParent: 0
@@ -1547,7 +1551,7 @@ Camera:
   m_GameObject: {fileID: 362459500}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1639,6 +1643,10 @@ Prefab:
       propertyPath: m_Name
       value: idle_soldier2
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b1143a5c02ec7064eb096ce320d6c471, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dc15e46cc05ecd49a040da3d58dce1f, type: 3}
   m_IsPrefabParent: 0
@@ -1670,7 +1678,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 407756730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.76}
+  m_LocalPosition: {x: 0, y: 0, z: 2.84}
   m_LocalScale: {x: 0.01473019, y: 0.01473019, z: 0.01473019}
   m_Children: []
   m_Father: {fileID: 1411437360}
@@ -1678,7 +1686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -123.315, y: -90}
+  m_AnchoredPosition: {x: -123.52, y: -90.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &407756732
@@ -2031,7 +2039,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: b544816461f324e56a39767fdeb5b114, type: 2}
       propertyPath: reflectSkybox
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
@@ -4047,7 +4055,7 @@ Camera:
   m_GameObject: {fileID: 1245186100}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -4081,8 +4089,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1245186100}
-  m_LocalRotation: {x: -0.27835763, y: 0.645183, z: 0.27339473, w: 0.6568952}
-  m_LocalPosition: {x: -2.4279127, y: -11.174949, z: 2.2213132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -7.8220325, z: 0.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6025,7 +6033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322b86cf161919e44b7440002eab8f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbrEnemiesStock: 0
+  nbrEnemiesStock: 20
   enemy: {fileID: 1793890490432642, guid: 1e406fdfcb0f4ff4e92b355151884ba4, type: 2}
   player: {fileID: 573040101}
   dieText: {fileID: 407756732}
