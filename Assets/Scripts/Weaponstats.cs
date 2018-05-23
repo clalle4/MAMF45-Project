@@ -7,7 +7,6 @@ public class Weaponstats : MonoBehaviour {
     public bool complexDamage = false;
     public bool playerWeapon = false;
     public bool playerShield = false;
-    public Text hpText;
 	// Use this for initialization
 
 
